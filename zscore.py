@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 import numpy as np
 from pandas.plotting import scatter_matrix
@@ -18,4 +17,3 @@ corr_matrix = df[num_cols].corr()
 print(corr_matrix)
 scatter_matrix(df[num_cols], figsize=(12, 8))
 plt.show()
-
