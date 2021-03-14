@@ -18,10 +18,16 @@ df[num_cols] = scaler.fit_transform(df[num_cols])
 
 # plot and calculate correlation
 corr_matrix = df[num_cols].corr()
-scatter_matrix(df[num_cols], figsize=(12, 8))
+# scatter_matrix(df[num_cols], figsize=(12, 8))
 # plt.show()
 
 # regression model. predict corruption based od legal par
-data_X, data_y = df['Legal'], df['Corruption']
+data_X, data_y = df[['Legal']], df['Corruption']
 X_train, X_test, y_train, y_test = train_test_split(data_X, data_y, test_size=0.33, random_state=42)
-print(y_train)
+# train
+reg = LinearRegression().fit(X_train, y_train)
+# make predictions using training set
+cor_pred = reg.predict(X_test)
+
+plt.scatter(X_train, y_train, color="black")
+plt.show()
