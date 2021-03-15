@@ -27,8 +27,6 @@ X_train, X_test, y_train, y_test = train_test_split(data_X, data_y,
 scaler = StandardScaler()
 X_train_standarized, X_test_standarized = scaler.fit_transform(X_train), scaler.fit_transform(X_test)
 
-
-
 # train
 reg = LinearRegression().fit(X_train_standarized, y_train)
 # cross validation
@@ -38,7 +36,7 @@ cor_pred = reg.predict(X_test_standarized)
 
 # The coefficient of determination
 print("R2: %.2f" % r2_score(y_test, cor_pred))
-print("MSE: %.2f" % mean_squared_error(y_test, cor_pred))
+print("RMSE: %.2f" % np.sqrt(mean_squared_error(y_test, cor_pred)))
 
 # plot outputs
 plt.scatter(X_test_standarized, y_test, color='black')
