@@ -4,7 +4,7 @@ import numpy as np
 from pandas.plotting import scatter_matrix
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_validate
 from sklearn.metrics import r2_score, mean_squared_error
 
 
@@ -27,10 +27,15 @@ X_train, X_test, y_train, y_test = train_test_split(data_X, data_y,
 scaler = StandardScaler()
 X_train_standarized, X_test_standarized = scaler.fit_transform(X_train), scaler.fit_transform(X_test)
 
+
+
 # train
 reg = LinearRegression().fit(X_train_standarized, y_train)
+# cross validation
+lin_scores = cross_validate(reg, X_train_standarized, y_train, cv=10)
 # make predictions using training set
 cor_pred = reg.predict(X_test_standarized)
+
 # The coefficient of determination
 print("R2: %.2f" % r2_score(y_test, cor_pred))
 print("MSE: %.2f" % mean_squared_error(y_test, cor_pred))
